@@ -1,136 +1,169 @@
-%PDF-1.4
-%���� ReportLab Generated PDF document (opensource)
-1 0 obj
-<<
-/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R /F5 6 0 R /F6 8 0 R
->>
-endobj
-2 0 obj
-<<
-/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
->>
-endobj
-3 0 obj
-<<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
->>
-endobj
-4 0 obj
-<<
-/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
->>
-endobj
-5 0 obj
-<<
-/BaseFont /Symbol /Name /F4 /Subtype /Type1 /Type /Font
->>
-endobj
-6 0 obj
-<<
-/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F5 /Subtype /Type1 /Type /Font
->>
-endobj
-7 0 obj
-<<
-/Contents 14 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 13 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
+# Municipal Services Application — South Africa
+### AAPD7112/w | PROG7312 | IIE Rosebank College | 2026
 
->> 
-  /Type /Page
->>
-endobj
-8 0 obj
-<<
-/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F6 /Subtype /Type1 /Type /Font
->>
-endobj
-9 0 obj
-<<
-/Contents 15 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 13 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
+---
 
->> 
-  /Type /Page
->>
-endobj
-10 0 obj
-<<
-/Contents 16 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 13 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
+## Overview
 
->> 
-  /Type /Page
->>
-endobj
-11 0 obj
-<<
-/PageMode /UseNone /Pages 13 0 R /Type /Catalog
->>
-endobj
-12 0 obj
-<<
-/Author (\(anonymous\)) /CreationDate (D:20260511204350+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260511204350+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
-  /Subject (\(unspecified\)) /Title (\(anonymous\)) /Trapped /False
->>
-endobj
-13 0 obj
-<<
-/Count 3 /Kids [ 7 0 R 9 0 R 10 0 R ] /Type /Pages
->>
-endobj
-14 0 obj
-<<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2034
->>
-stream
-Gatm<968iG&AII3lqD%QEZ<I1`!;[!lr^7A3.=Cm0=oLEA0Ig@K`nNRdi[HN5Y@grR<4\7NX+:i[u847(BeRP&H.*c"?<$hfn]X%0UW#_/-dLDi,[9CdN^'97kHBe!<M*N/J<:/as#GY#O3D:=N#A#UQ@Y4:`J()5ZLHV:4Y*qS5Q2pIpF<D'!!^@1!cF[`,ccu<j@HI.FJ?rPkm(/$b:fH4Mu)5@.G0^^F;j#pt:F<i72d(+Lha[EKsu"V6,:#qNF'/IlP)hk7^2.ec=E!s$-)[i:d04]g'<:lk6J(/qMa+l[m<_iM*PGQ9Y,^mJ_MedBZDa]YIu-@(=#I*)pb'RUT5QTRh_l/^GI@o_XVe2]FKu]?Kn:gcVY4o6%YiT#VcC9_b&7W,7Jm5rM$t&)lLaYWcAg@$H@<^.u!^E%D4nLh)gSEu:b,15E*"!-/ZD=Cpa'QsjaZ1Eh<?8F\?/E``_I2?Z^M\_sg:KDm>1jW$.09](#4b6_A-,$l"r*OhoapYh^IdS.MuPL(N"$cG0pY>Vo%A"LGd4A:FXNkGH7o15T#6@OQ4.,lFL**btaoV;TC7Q.q$m<OHVjq+F&,3@-5OVmh'L;-;`,S=DKDffB.*bNed;tFRV/nR4<QcLl0T&^p-&on]=8JXckLdMsa2#da>.Nui'(-*)>80/qE4bj;i"pc\H;H?1`7C4)*)f57s5D)a\_YLdf\,n:'+^[LrHDOK:]t13n5qlCN,Gn)'.PMk)^\+[Y.;Z6c\!1@'-A2aO7+=EeAZ=p:#k:(-kBb>kCtUsi++$AMj1Iu/EkJ2F?W=DT'j=pB[=)Eok`+f`X/KYlTke)?EDkPt*9tsEi"OFWbj-0g4_%KH#)A37qO6a-XE]Jt!u#bR/XLk<@_%`'arl"QL0M8sL]Ii2mUdJVYu&SNYs"n*?lSQ'?DuU\(,M)]-nRld9`djA^iIW)6gC(O*P_KP746jdp5\<310jnf@20MK'GiPfiOUFc)E4\W(O_\aptWdA`;JOVC:ST4<l\a]bpTnu([C.SXU*1Tm2BJoja\O;0f9<@.KZ3$)?EnS!Dc+CJ?+QXl!>Umaq.+Z9T0[?c(`'oGGr;;:.p.Zkg(YrJ#$kmB]1.@Y!gLgl`OaLX]fC5s6LXC(h6YcM!7K*\$FH<_9b#pNL[sefj%@$f&\M)0^#D##nMBgK;!91X:>e(pF$:`fJ#J)#Qnu`e?b:D_aRk7V!Q/Apog!pc-jqj^mpD5\57P"`C\*3b/o_'ZZsE=W\fnIY1c2G!Tn)Yj-ad];WZ)6VPlrkS1(I$mKA[K7mXd[1pSSZE;=VkVg.gJJP80YjCtFaW=JpXJNkeU4R;!ah:AI4Uf<f,Kkd1qfXO2&^I\bCauJlA9=#UkEV?8kX$U8u<gQkm@$Ipk&,s+"pfM?uC>1t/K]BVX*p_a+3V1bl/9_IGn8+^WYkqMr,"*/NeW6,]mos,ON8-;R9B9SR6e'=hB#\peX0<U!UD^."\X6-'3h>]^;iP$X0=+V)>a>uZS'k0:OpFf-]I=q[`stiT=O$(T$iPL9FKe;fR`3kej.e/22N-j)X>rDhWtSDhJ,PMAF&Mk%$9BB['30[/q(H7os1VQ*FVZrF_Ft8#@eVcDl&sBF](eLQ8h*QDRC)^A;E2'9C:9g0VD>\UJG<1e'f(/mq:iSC17^UbA3)TqQsr6>Ck(;EW2\TQij5)S7jcU?Go)BVh;TrC"gQuH`%#oSPG3Kdo(=mrpBB`%T@]I?m!YXh\!P&@#!R1cmmeCr>pFccV4<8Mc6XNV^@&&J$Rm$i9g./`!19d8`B3(Q)PQm]4'2`)3nPi%lXB]]AgX#frGk``%k(NUfq\d\.5ELsQ9mnD$"'1r(6"4#dK6uo+%B-j+)oR/C7%3K-^%-o7.Mi:lOP6m-qb$2>Dmqq0lJN'_5.;\m/k`*Qj8fF35`FT+DF4+Qh)8QXp-J);0W32!4J1RN&@I[eo;%,0+VJK2-tpnD$`sii+r_,6(esDppLKl*jr#e('l'1$sL5GYa.Q`eSGT:>n;8]"*LE15Q~>endstream
-endobj
-15 0 obj
-<<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2182
->>
-stream
-Gatm=gJZcs&:N^lqJ"u#M5$JNGq6:&&9,K%/-J&((L@;kCep-Lb01.\hf$h07LjDh8jUI!T%f\$1T.iR!'X_?H-ZhJiu,M!";$5?><iaH1!Ir%FE[0P+E0K-cqDC;3.Oj]oR_'<`c9YtKj\7sH%;(]Rs?6G'f]h/6"&m*1Cc_^Y%bk/Jhnik.UU*[)pI1&V*<r4ZfU2R[@D0(\(:s"(tusuZYpTuR`0/rd0NK?70TV)Kq)dD0jXogR!Y\B^s.CU9+P@feh7:Z@B'I,l4BijJL^Zak-`eA@lWn1ECt;@.3O-@l&pr^/-IU7aLU6ZS3N6oF%T'%bRP-ARZk9EKJ/5E9JMDHWQMkk?j".[fWTlUMHK%@AqF$"McPGek-P+FUV9b#;8Fi6li8LQ#JEB.)B:$Kf9#)F]7V?)8@F*Vb7Ou7]#rE05Y>Df=]4/Zjuf[P=t6mq5ot%:MrRS+91E>Sq[nOtS@Or;8dVsp!1D`.1./rO=S!Fd?;rpR6W:[X"f(n+$asKn$eknr]4l[t0\%/mRkPhU]*2J:5rHNcPNL4s9TS%jdQ$a6EKnI%YOP0"P*T&iNB=t9injb1R,Aq[=AW"U;Ld-7/bEI@s41Ipq"p))&#!o],hk:Rb9c`$n7Y,p!hb%ZCklpT<%(1pBBRjHaN6HdRB1G7Q@K2%[3/+C/fWGq!iNjln;J/gZ$TH#EXB.L6L)6Vl`:P&K^kMtYj5`OhXts[[Z^S7i@V$a60,jBl=ga+pUGDRJ&"oaneu_OD:(Z$LIj_1:+6d"1(67p\tX'7`7'-)f+2+glWQ_r"41QdQKso'%Iu-+MYkg9QaTGI&lcu-UPh1Z6)(uQ$jI1%9WB_$_I5)cT50=Xmls8`/1e?k&(2=`X7t[kEiCLHS<]O[BLs\bi:<)hiRCY:"ms>G2Uk-Gf#tF_V!3TR$"G0Zr8"u+K\K)1j)iesPEoWNYH>'DG=fTS"*M`"UIhdmLVY>^=&Z-1+\V[.3E++q-^S]r7AFpqF]?ObJsSU_99u!%M.SRR-S.&N<33\tNr*BN8+Sb=Mf=Z-=O>PCCBP>M3Bc.;kX-k`Gc+=I_/X_PCZJ#pGLcq6e1^-uVPp^ID0(nkTotV&k%HckQ7HJkRo9`FQETro`>Yj1BMLH5>6b4d2jc-6.Q8@8!duS-HXXc3HS?,OaIftT(qm+%nl0d0k\/aMTl"<aW+qPfKj/J9mX%F3b5dc;d7O,-;,8Y'e_3R_FZZ/A&lU\kCW9"8;qP!a`SN5gLA`CnZD-Fj=*7Y/l6j5GkTK`W0[:r0X?)Vr*`$\Ya3tpW<rB,'3lsi*o[@3=?""SPF6,a+LQ+o61f-'l8QUM;"tQSj-:>X0L@3P(dK*f:mO-"400Ro%7g$_a>b/)rC,B'Qn(Q]WdVugQ>%%2sXh-h<ob1]!l(\:<.i3Df*'[-hRmX.1IQX%8;NM6L-:.&Sho'W_<I3(jZsjcp=kUoq8O!BeLln:mr"Y`3jL']4%1BaH-AipPetqpCU[98NMo'HRTWTVj1_-.9X2>Z=&/e`P_0)JRS17BK3q8R+"VlLLg;B_c2@R.EU!rUAUjoV,(\km)2/AP)7,h^j&pS+O:>mdj*s*+q2`RABRQg8%4s',=(aYZd:&hH8SGp^o9_V>nCF;2UgpO-4N-k8,*bU0\2SKOSZ`KH[Z&"<.g80F]pKE#];_j6Ci=MR2o[aTfIblqU!\Xi-Vlj+/W46[<DNeCj4T,Gt0K#&-T"d3MdK[q1pYg5SNiG^Xe'$f9Zu,jN<IpP[kfhdD+^#YIZK7oXA(ZhQm'cH\G+)p<o1'`=AqKG.l],BoE4_5GSQ]:T$o"6+&p#`GM6rYY,M=^%l"9NVV2\#QO:i!Fp)sCSaSk&Qi!],NG""u66\$erXH>C:b"]MVH"*]HW:d\?ih)1^O44V"@9@kj(>*m$VhkijXKs";i3<S#])]lp-=a"K-KdTl[+NE32p+<qQuGphL[9b_)V.s>5?>)%+M+=UMTYZkBohVu(VUkrF0[YeQW^G,_7Po-(=j!bg-1,&(mn6^)XAlsI^AE&d@!n!OKF::mU$+si:",W0*V6areOtl*]@H.GS4e?S&<`4km"oqc)/rC8$mS"?gBDu*YGlM_X45)e`:X-q+j`L<_N;=Ye?G?Z>B^r!8HgXQ4LipFd$_"gcXs]eE)@,MJh>,2!pp["UG&0oH94a~>endstream
-endobj
-16 0 obj
-<<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1759
->>
-stream
-Gatm<h,E&f&:`#5Z#^H-Zj2VffT+du\JmL6V,KE,aj%Ng@Vd>&fTIc.E;]I>njh\)N,t[+84MIdmVfM6r@e6k5G\4;;Lm4VN2?^`L%te+@lZ7C!pB0kNrc4??-i'C)A&:GJOKVn^jRN^I+30ZOGhiNpr)b%^kZE)-jGS?"1seJ/@?,*e3RjZpomWS),^gZ:LUu+1&ZI%'c5%XhS]7$jr^0LPO[:Gh14"%c6&G#q,FBDMXoRbW(/C*r+=",K)[597%n3cWLb5EEKMOef3F3!"CpJ)r4a1Q5#d$`(B_j7a3nQ=d`V+`B)#bN^NmP"XNC20o?CdVS"J&!AYgQR(MbdKh9%!1?8$'ap[YZ\TL[TT,\mqYAt\1MMf#]<1iUfOQ=l6\8o%dsFUYhC5Y"b1:+:VW)rD.?.=&rX%5Y,D8/I/k%^c\4mBdS:^$SflLhfD>VCi!@;\N=g]F)2_HbYMOg[GX1L=-AF#"Y.1+NEo^Q(a*4nT_cp+J-b=0A*=UY$!*:L6=9H"g[QIa7BeZoC@@C!;&]L@0./gr!Ff<a?i9G/_>@/F!bhGGK+[;'MNWND&=DI`U+_>W.,qgR1=B0qOu0$HJfB&DdkKD9sC*=q];(E]H,\O4t\duh\,N\=Ef?GH121+&5jCPA.Ld9ns5ZSe?%DO---$Qj3e%WS7L:j.dE%i<N'#Y:;R&H<L@eYpW8llG^LX2;_CE01h35:<cc5^-b.XY*-dnuAN"d>+hM-E6^.=)`MMSjl$L5RFqomRq+>ljbj`Mh_p'kEs#j\n0Y;VfO3n7D:%/rKbZ9/E:?&l>@Np,MKO]%)RQ^-ZS5*^D5ara^l`orRVXCD'88S,B5^-]+P=[D!*g#/Ee,*,gGf6pBWUj\](_C&//OGe*X6*j,P<Ef61HmY7mf\q(U>q9VUaV:@:KZ])r-j'CEcuSCAas4gOSOdsH\*(>j<ld*F!Zb!K]O^52)aQeC=cqsp"HZ[;/BON#sA6i#7%P]EnD9_LqT"m$9W[p47N0WhW=J>p(!5NoZQX,WLS]VjnRZ\&@!VEUk3dkO1sFG[&4gYR2tS@20T_//b\?@fIK#]8dO8TLaDbk6>D<eRVdi60)bIgF-0t5&(]A(3D;.8Yt(e]_83)W,F/]gDb7h*h6K04.NuQ#;'0I#+UQ\^r;q6*6ES.=Aa3&%OBTY_,pn1rjY_TU`7P+$E-9m2g8VMd.#p`@,p/-6AJso5=7;Un[jagi!pqfrc@RRjp^]LBDY1QJdn0sJL0FDbSH@^AJ>(_*1aFV?(fISAb2.Y`49\Mi?qO#`&Q0<oG96p4_%]qX^5/^U>k@&L+%KFQmPjsJc>$*9'SeWsp"&B19gHX..g04;$`;le(u8]TD+!b0d`M3-:&=&CC9/dGF+%8Sa\Qc:]cm2U'RrL>[Kt`Ei+s!qrq?PH?_)K<StK5J^,H)"<R>qGd,68cO6\-#o)<Yu\iR.Fp/]FS.cR==IL;?(K"6#4SQ^P`&gl0ADPFQCQT32Q<#lL0Ae;9RQH78q'?j#bQA&Y]a[0E;A2UXV2&-q*X<K7*S[GoNF:iTfU;K$,/0$^7Rj#=fIg"D#cnSR<1E>jl^Xk4.o\4l7,:.EAd&#:<92#9C+u[!Nb`+XFpSc_^k?E,2OUbGrBDKTq#W%;M<nccAYUYU!3%jc!/@Al3'XR^DbA?glKc,C7n[6h#9\J1fd4SLuU#JT3\a=(#2rMmoX_!mj7FU4aqX`m.U\Js,f51/tH,`oqS%?UD@sdQ)pD48;"*:Xng&~>endstream
-endobj
-xref
-0 17
-0000000000 65535 f 
-0000000061 00000 n 
-0000000142 00000 n 
-0000000249 00000 n 
-0000000361 00000 n 
-0000000480 00000 n 
-0000000557 00000 n 
-0000000662 00000 n 
-0000000867 00000 n 
-0000000982 00000 n 
-0000001187 00000 n 
-0000001393 00000 n 
-0000001463 00000 n 
-0000001744 00000 n 
-0000001817 00000 n 
-0000003943 00000 n 
-0000006217 00000 n 
-trailer
-<<
-/ID 
-[<ce44926b1f27b4bfd98992be1faba6e5><ce44926b1f27b4bfd98992be1faba6e5>]
-% ReportLab generated PDF document -- digest (opensource)
+A C# .NET Framework 4.8 Windows Forms application that provides South African
+citizens with a unified platform to:
 
-/Info 12 0 R
-/Root 11 0 R
-/Size 17
->>
-startxref
-8068
-%%EOF
+- **Report municipal issues** (potholes, sanitation, electricity failures, etc.)
+- **Browse local events and announcements** with search and smart recommendations
+- **Track service request status** using advanced data structures
+
+---
+
+## Prerequisites
+
+| Requirement          | Version         |
+|----------------------|-----------------|
+| Operating System     | Windows 10/11   |
+| .NET Framework       | 4.8             |
+| Visual Studio        | 2019 or later   |
+| SDK                  | .NET Desktop SDK (included with VS) |
+
+---
+
+## How to Compile
+
+### Option A — Visual Studio (recommended)
+
+1. Open **Visual Studio 2019** or later.
+2. Click **File → Open → Project/Solution**.
+3. Navigate to the project folder and open `MunicipalServicesApp.sln`.
+4. In the **Solution Explorer**, right-click the project → **Build**.
+5. Confirm there are no build errors in the **Output** window.
+
+### Option B — Command Line (MSBuild)
+
+```bash
+# Open Developer Command Prompt for VS
+cd path\to\MunicipalServicesApp
+dotnet build MunicipalServicesApp.csproj -c Debug
+```
+
+---
+
+## How to Run
+
+### From Visual Studio
+Press **F5** (Debug) or **Ctrl+F5** (Run without debugging).
+
+### From the compiled executable
+```
+MunicipalServicesApp\bin\Debug\net48\MunicipalServicesApp.exe
+```
+
+---
+
+## How to Use
+
+### 1. Main Menu
+On startup the dashboard presents three options:
+
+| Button                        | Feature                      | Status    |
+|-------------------------------|------------------------------|-----------|
+| Report Issues                 | Submit a new issue report    | ✔ Active  |
+| Local Events & Announcements  | Browse and search events     | ✔ Active  |
+| Track Service Requests        | View and search requests     | ✔ Active  |
+
+---
+
+### 2. Report Issues
+
+1. Enter the **location** of the issue (e.g. "12 Main Street, Soweto").
+2. Select a **category** from the dropdown (Sanitation, Roads, Utilities, etc.).
+3. Write a **description** of the problem in the text box.
+4. Optionally click **Attach File** to upload an image or document (max 5 MB).
+5. Watch the **progress bar** advance as you complete each field.
+6. Click **Submit Report** — a reference ID (e.g. `MSA-7841029384`) is generated.
+7. Click **Back** to return to the main menu.
+
+> **Engagement Feature:** The progress bar advances 25% per completed field and
+> displays encouraging messages, motivating users to submit complete reports.
+
+---
+
+### 3. Local Events & Announcements
+
+- **Search** — type a category or keyword and click Search to filter events.
+- **Clear** — resets to the full sorted event list.
+- **Queue view** — shows events in FIFO processing order.
+- **Search History** — shows your recent searches (Stack/LIFO).
+- **Categories** — lists all unique categories (HashSet).
+- **Sorted View** — displays all events sorted chronologically (SortedDictionary).
+- **Add New Event** — enter a title, category, and date to add a custom event.
+- **Recommendations panel** (right side) — suggests related events based on your search.
+
+---
+
+### 4. Track Service Requests
+
+1. Submit at least one issue via **Report Issues** first.
+2. Copy the Reference ID shown in the confirmation message.
+3. Open **Track Service Requests**.
+4. Paste the Reference ID in the search box and click **Search** (BST lookup).
+5. The result shows Category, Status, Priority, and submission date.
+6. Click **Load Priority Queue** to see all requests ordered by urgency.
+7. Click **Show Workflow Flow** to see the BFS graph traversal of the service pipeline.
+8. Click **↻ Refresh List** to update the data grid.
+
+---
+
+## Data Structures Used
+
+| Structure              | Location                  | Purpose                                      |
+|------------------------|---------------------------|----------------------------------------------|
+| `List<IssueReport>`    | AppData.cs                | Primary storage of all submitted issues      |
+| `BinarySearchTree`     | BinarySearchTree.cs       | Fast O(log n) lookup by Reference ID         |
+| `PriorityQueueManager` | PriorityQueueManager.cs   | Max-heap ordering issues by priority         |
+| `GraphManager`         | GraphManager.cs           | Directed graph + BFS for workflow traversal  |
+| `Queue<EventItem>`     | EventsForm.cs             | FIFO event processing order                  |
+| `Stack<string>`        | EventsForm.cs             | LIFO search history                          |
+| `SortedDictionary`     | EventsForm.cs             | Automatic chronological event sorting        |
+| `HashSet<string>`      | EventsForm.cs             | Unique category deduplication                |
+
+---
+
+## Project Structure
+
+```
+MunicipalServicesApp/
+├── MainForm.cs              — Main menu dashboard
+├── IssueForm.cs             — Report Issues form
+├── EventsForm.cs            — Local Events & Announcements form
+├── EventsForm.Designer.cs   — Designer stub
+├── StatusForm.cs            — Service Request Status form
+├── StatusForm.Designer.cs   — Designer stub
+├── IssueReport.cs           — Issue data model
+├── EventItem.cs             — Event data model
+├── AppData.cs               — Shared static data store
+├── BinarySearchTree.cs      — BST implementation
+├── PriorityQueueManager.cs  — Priority queue (max-heap)
+├── GraphManager.cs          — Adjacency list graph + BFS
+├── Program.cs               — Application entry point
+├── MunicipalServicesApp.csproj
+├── MunicipalServicesApp.sln
+└── README.md                — This file
+```
+
+---
+
+## Troubleshooting
+
+| Problem                          | Solution                                              |
+|----------------------------------|-------------------------------------------------------|
+| App does not compile             | Ensure .NET 8 is installed                            |
+| "File too large" on attachment   | Select a file under 5 MB                             |
+| Grid shows no data               | Submit an issue first via Report Issues               |
+| BFS shows "Submit an issue first"| Submit at least one issue via Report Issues           |
+| Build error: missing reference   | Right-click Solution → Restore NuGet Packages         |
+
+---
+
+## References
+
+- Hart, T.G.B. et al., 2020. Innovation for development in South Africa. *Forum for Development Studies*, 47(1).
+- Microsoft, 2024. Windows Forms documentation. https://learn.microsoft.com/en-us/dotnet/desktop/winforms
+- Hamari, J. et al., 2014. Does gamification work? *HICSS*, pp.3025–3034.
