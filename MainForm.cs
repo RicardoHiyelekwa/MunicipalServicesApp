@@ -7,110 +7,82 @@ namespace MunicipalServicesApp
     {
         public MainForm()
         {
-            Text = "Municipal Services — South Africa";
-            Size = new Size(900, 620);
+            Text = "Municipal Services";
+            Size = new Size(700, 460);
+            MinimumSize = new Size(700, 460);
             StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.FromArgb(30, 30, 40);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
 
-            // ── Header ──────────────────────────────────────────────
             Panel header = new Panel
             {
                 Dock = DockStyle.Top,
-                Height = 100,
-                BackColor = Color.FromArgb(0, 84, 166)
+                Height = 80,
+                BackColor = Color.FromArgb(136, 0, 27)
             };
-
-            Label lblTitle = new Label
+            Label title = new Label
             {
-                Text = "Municipal Services",
+                Text = "Municipal Services Dashboard",
                 ForeColor = Color.White,
-                Font = new Font("Segoe UI", 22, FontStyle.Bold),
-                AutoSize = true,
-                Top = 18,
-                Left = 30
+                Font = new Font("Segoe UI", 20, FontStyle.Bold),
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Fill
             };
+            header.Controls.Add(title);
 
-            Label lblSub = new Label
+            Label subtitle = new Label
             {
-                Text = "Citizen Engagement Platform — South Africa",
-                ForeColor = Color.FromArgb(200, 220, 255),
+                Text = "South Africa — Serving Our Communities",
+                ForeColor = Color.FromArgb(180, 180, 200),
                 Font = new Font("Segoe UI", 10),
-                AutoSize = true,
-                Top = 62,
-                Left = 32
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Left = 0, Top = 90, Width = 684, Height = 30
             };
 
-            header.Controls.AddRange(new Control[] { lblTitle, lblSub });
-
-            // ── Menu Cards ──────────────────────────────────────────
-            Label lblMenu = new Label
-            {
-                Text = "SELECT A SERVICE",
-                ForeColor = Color.FromArgb(160, 180, 210),
-                Font = new Font("Segoe UI", 9, FontStyle.Bold),
-                AutoSize = true,
-                Top = 130,
-                Left = 50
-            };
-
-            Button btnReport = CreateMenuButton(
-                "📋  Report Issues",
-                "Submit a new municipal issue report",
-                Color.FromArgb(0, 120, 215), 170);
-
-            Button btnEvents = CreateMenuButton(
-                "📅  Local Events & Announcements",
-                "Browse upcoming events and announcements",
-                Color.FromArgb(16, 137, 62), 280);
-
-            Button btnStatus = CreateMenuButton(
-                "🔍  Track Service Requests",
-                "Check the status of submitted requests",
-                Color.FromArgb(136, 0, 27), 390);
+            Button btnReport = CreateButton("📋  Report Issues", 140);
+            Button btnEvents = CreateButton("📅  Events & Announcements", 210);
+            Button btnStatus = CreateButton("🔍  Track Service Requests", 280);
 
             btnReport.Click += (s, e) => new IssueForm().ShowDialog();
             btnEvents.Click += (s, e) => new EventsForm().ShowDialog();
             btnStatus.Click += (s, e) => new StatusForm().ShowDialog();
 
-            // ── Footer label ────────────────────────────────────────
-            Label lblFooter = new Label
+            Label footer = new Label
             {
-                Text = "© 2026 IIE Rosebank College — AAPD7112/w",
-                ForeColor = Color.FromArgb(100, 110, 130),
+                Text = "AAPD7112/w  |  PROG7312  |  IIE 2026",
+                ForeColor = Color.FromArgb(100, 100, 120),
                 Font = new Font("Segoe UI", 8),
-                AutoSize = true,
-                Top = 545,
-                Left = 50
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Left = 0, Top = 390, Width = 684, Height = 24
             };
 
             Controls.AddRange(new Control[]
             {
-                header, lblMenu,
+                header, subtitle,
                 btnReport, btnEvents, btnStatus,
-                lblFooter
+                footer
             });
         }
 
-        private Button CreateMenuButton(string title, string subtitle, Color colour, int top)
+        private Button CreateButton(string text, int top)
         {
-            Button btn = new Button
+            var btn = new Button
             {
-                Top = top,
-                Left = 50,
-                Width = 780,
-                Height = 80,
-                BackColor = colour,
+                Text = text, Top = top, Left = 175,
+                Width = 350, Height = 52,
+                BackColor = Color.FromArgb(0, 84, 166),
                 ForeColor = Color.White,
-                Font = new Font("Segoe UI", 13, FontStyle.Bold),
-                Text = title + "\n" + subtitle,
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 FlatStyle = FlatStyle.Flat,
-                TextAlign = ContentAlignment.MiddleLeft,
-                Padding = new Padding(20, 0, 0, 0),
-                Cursor = Cursors.Hand
+                Cursor = Cursors.Hand,
+                TextAlign = ContentAlignment.MiddleCenter
             };
             btn.FlatAppearance.BorderSize = 0;
+            btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 104, 196);
             return btn;
         }
     }

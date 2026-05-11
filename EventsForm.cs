@@ -2,327 +2,321 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MunicipalServicesApp
 {
     public partial class EventsForm : Form
     {
-        // ── Data structures ─────────────────────────────────────────
-        private List<EventItem> events                            = new List<EventItem>();
-        private Queue<EventItem> eventQueue                       = new Queue<EventItem>();
-        private Stack<string> searchHistory                       = new Stack<string>();
-        private HashSet<string> uniqueCategories                  = new HashSet<string>();
-        private SortedDictionary<DateTime, EventItem> sortedEvents = new SortedDictionary<DateTime, EventItem>();
+        // ── Data structures ────────────────────────────────────────
+        private SortedDictionary<DateTime, List<EventItem>> sortedEvents
+            = new SortedDictionary<DateTime, List<EventItem>>();
+        private Queue<EventItem>      eventQueue    = new Queue<EventItem>();
+        private Stack<string>         searchHistory = new Stack<string>();
+        private HashSet<string>       categories    = new HashSet<string>();
+        private Dictionary<string, int> searchCount = new Dictionary<string, int>();
 
-        // ── UI controls ─────────────────────────────────────────────
-        private ListBox lstEvents;
-        private ListBox lstRecommendations;
-        private TextBox txtSearch;
-        private Label lblEventCount;
+        // ── Controls ───────────────────────────────────────────────
+        private ListBox  lstEvents;
+        private ListBox  lstRecommendations;
+        private TextBox  txtSearch;
+        private ListBox  lstInfo;
 
         public EventsForm()
         {
             Text = "Local Events & Announcements";
-            Size = new Size(950, 680);
+            // 950 wide x 680 tall — all controls fit
+            Size = new Size(980, 695);
+            MinimumSize = new Size(980, 695);
             StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
 
-            // ── Header ──────────────────────────────────────────────
+            SeedSampleEvents();
+
+            // ── Header ────────────────────────────────────────────
             Panel header = new Panel
             {
-                Dock = DockStyle.Top, Height = 70,
-                BackColor = Color.FromArgb(16, 137, 62)
+                Dock = DockStyle.Top, Height = 65,
+                BackColor = Color.FromArgb(0, 84, 166)
             };
-            Label lblHead = new Label
+            Label lblHeader = new Label
             {
                 Text = "📅  Local Events & Announcements",
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI", 16, FontStyle.Bold),
-                AutoSize = true, Top = 18, Left = 20
+                AutoSize = true, Top = 16, Left = 20
             };
-            header.Controls.Add(lblHead);
+            header.Controls.Add(lblHeader);
 
-            // ── Search bar ──────────────────────────────────────────
-            Label lblSearch = MakeLabel("Search by category or title:", 20, 90);
+            // ── Search bar ────────────────────────────────────────
+            Label lblSearch = MakeLabel("Search (category / keyword):", 20, 80);
             txtSearch = new TextBox
             {
-                Top = 113, Left = 20, Width = 350, Height = 30,
+                Left = 20, Top = 100, Width = 330,
                 Font = new Font("Segoe UI", 10)
             };
-            SetPlaceholder(txtSearch, "e.g. Roads, Cleanup...");
-            Button btnSearch = MakeButton("🔍  Search", 385, 110, 120, Color.FromArgb(16, 137, 62));
-            Button btnClear  = MakeButton("✖  Clear",   520, 110, 100, Color.FromArgb(180, 180, 190));
+            Button btnSearch = MakeButton("🔍 Search", 360, 97, 90, Color.FromArgb(0, 84, 166));
+            Button btnClear  = MakeButton("✖ Clear",   460, 97, 80, Color.FromArgb(100, 100, 120));
 
-            lblEventCount = new Label
-            {
-                Top = 118, Left = 640, Width = 280, AutoSize = false,
-                Font = new Font("Segoe UI", 9),
-                ForeColor = Color.FromArgb(80, 80, 100)
-            };
-
-            // ── Main list ───────────────────────────────────────────
-            Label lblEvents = MakeLabel("Events (sorted by date):", 20, 152);
+            // ── Events list ───────────────────────────────────────
+            Label lblEvents = MakeLabel("Events (sorted by date):", 20, 135);
             lstEvents = new ListBox
             {
-                Top = 175, Left = 20, Width = 540, Height = 270,
-                Font = new Font("Segoe UI", 10),
-                BorderStyle = BorderStyle.FixedSingle,
-                HorizontalScrollbar = true
-            };
-
-            // ── Recommendations ─────────────────────────────────────
-            Label lblRec = MakeLabel("Recommended Events:", 580, 152);
-            lstRecommendations = new ListBox
-            {
-                Top = 175, Left = 580, Width = 340, Height = 270,
+                Left = 20, Top = 155, Width = 540, Height = 330,
                 Font = new Font("Segoe UI", 9),
-                BorderStyle = BorderStyle.FixedSingle,
-                ForeColor = Color.FromArgb(0, 84, 166),
-                HorizontalScrollbar = true
-            };
-
-            // ── Action buttons row ──────────────────────────────────
-            Label lblActions = MakeLabel("Data Structure Views:", 20, 462);
-
-            Button btnQueue      = MakeButton("📋 Queue",          20,  487, 130, Color.FromArgb(0, 84, 166));
-            Button btnHistory    = MakeButton("🕐 Search History", 165, 487, 150, Color.FromArgb(90, 60, 150));
-            Button btnCategories = MakeButton("🏷 Categories",     330, 487, 130, Color.FromArgb(180, 100, 0));
-            Button btnSorted     = MakeButton("📆 Sorted View",    475, 487, 140, Color.FromArgb(136, 0, 27));
-
-            // ── Add Event section ───────────────────────────────────
-            Panel addPanel = new Panel
-            {
-                Top = 540, Left = 20, Width = 900, Height = 85,
-                BackColor = Color.FromArgb(240, 248, 240),
                 BorderStyle = BorderStyle.FixedSingle
             };
-            Label lblAdd = MakeLabel("Add New Event:", 10, 8);
-            lblAdd.ForeColor = Color.FromArgb(16, 137, 62);
 
-            TextBox txtTitle    = new TextBox { Top = 30, Left = 10,  Width = 200 };
-            TextBox txtCat      = new TextBox { Top = 30, Left = 225, Width = 180 };
-            SetPlaceholder(txtTitle, "Event title");
-            SetPlaceholder(txtCat,   "Category");
-            DateTimePicker dtp  = new DateTimePicker { Top = 30, Left = 420, Width = 160, Format = DateTimePickerFormat.Short };
-            Button btnAdd       = MakeButton("+ Add", 598, 28, 80, Color.FromArgb(16, 137, 62));
-            btnAdd.Height = 26;
-
-            addPanel.Controls.AddRange(new Control[] { lblAdd, txtTitle, txtCat, dtp, btnAdd });
-
-            Button btnBack = MakeButton("← Back to Menu", 20, 637, 160, Color.FromArgb(60, 60, 80));
-
-            // ── Wire events ─────────────────────────────────────────
-            btnSearch.Click += (s, e) => Search(txtSearch.Text);
-            btnClear.Click  += (s, e) => { txtSearch.Clear(); LoadAllEvents(); };
-
-            btnQueue.Click += (s, e) =>
+            // ── Recommendations panel ─────────────────────────────
+            Label lblRec = MakeLabel("Recommendations:", 580, 135);
+            lstRecommendations = new ListBox
             {
-                lstEvents.Items.Clear();
-                lstEvents.Items.Add("── Event Queue (FIFO order) ──");
-                foreach (var ev in eventQueue)
-                    lstEvents.Items.Add($"  ▶ {ev.Title}  [{ev.Category}]  {ev.Date:dd MMM yyyy}");
+                Left = 580, Top = 155, Width = 340, Height = 330,
+                Font = new Font("Segoe UI", 9),
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = Color.FromArgb(245, 248, 255)
             };
 
-            btnHistory.Click += (s, e) =>
+            // ── Info / data-structure buttons ─────────────────────
+            Button btnQueue   = MakeButton("Queue View",    20,  500, 130, Color.FromArgb(136, 0, 27));
+            Button btnHistory = MakeButton("Search History",160, 500, 140, Color.FromArgb(136, 0, 27));
+            Button btnCats    = MakeButton("Categories",    310, 500, 120, Color.FromArgb(136, 0, 27));
+            Button btnSorted  = MakeButton("Sorted View",   440, 500, 120, Color.FromArgb(136, 0, 27));
+
+            // ── Add event panel ───────────────────────────────────
+            Label lblAdd = MakeLabel("Add Custom Event:", 20, 555);
+
+            TextBox txtTitle = new TextBox
             {
-                lstEvents.Items.Clear();
-                lstEvents.Items.Add("── Search History (most recent first) ──");
-                if (searchHistory.Count == 0) { lstEvents.Items.Add("  No searches yet."); return; }
-                foreach (var item in searchHistory)
-                    lstEvents.Items.Add($"  🔍 \"{item}\"");
+                Left = 20,
+                Top = 578,
+                Width = 200,
+                Height = 28,
+                Font = new Font("Segoe UI", 9)
             };
 
-            btnCategories.Click += (s, e) =>
+            TextBox txtCat = new TextBox
             {
-                lstEvents.Items.Clear();
-                lstEvents.Items.Add("── Unique Categories (HashSet) ──");
-                foreach (var cat in uniqueCategories.OrderBy(c => c))
-                    lstEvents.Items.Add($"  🏷 {cat}");
+                Left = 230,
+                Top = 578,
+                Width = 140,
+                Font = new Font("Segoe UI", 9)
             };
 
-            btnSorted.Click += (s, e) =>
+            DateTimePicker dtp = new DateTimePicker
             {
-                lstEvents.Items.Clear();
-                lstEvents.Items.Add("── Sorted by Date (SortedDictionary) ──");
-                foreach (var kvp in sortedEvents)
-                    lstEvents.Items.Add($"  {kvp.Key:dd MMM yyyy}  —  {kvp.Value.Title}  [{kvp.Value.Category}]");
+                Left = 380,
+                Top = 578,
+                Width = 135,
+                Font = new Font("Segoe UI", 9),
+                Format = DateTimePickerFormat.Short
             };
+
+            Button btnAdd = MakeButton("➕ Add", 545, 573, 95, Color.FromArgb(16, 137, 62));
+            // ── Info listbox ──────────────────────────────────────
+            lstInfo = new ListBox
+            {
+                Left = 580,
+                Top = 500,
+                Width = 340,
+                Height = 90, // antes 110
+                Font = new Font("Segoe UI", 9),
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = Color.FromArgb(250, 250, 255)
+            };
+            // ── Back button ───────────────────────────────────────
+            Button btnBack = MakeButton("← Back to Menu", 20, 615, 155, Color.FromArgb(60, 60, 80));
+            // ── Wire events ───────────────────────────────────────
+            btnSearch.Click += (s, e) => DoSearch(txtSearch.Text.Trim());
+            txtSearch.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) DoSearch(txtSearch.Text.Trim()); };
+            btnClear.Click  += (s, e) => { txtSearch.Clear(); LoadAllEvents(); lstRecommendations.Items.Clear(); };
+
+            btnQueue.Click   += (s, e) => ShowQueue();
+            btnHistory.Click += (s, e) => ShowHistory();
+            btnCats.Click    += (s, e) => ShowCategories();
+            btnSorted.Click  += (s, e) => LoadAllEvents();
 
             btnAdd.Click += (s, e) =>
             {
                 if (string.IsNullOrWhiteSpace(txtTitle.Text) || string.IsNullOrWhiteSpace(txtCat.Text))
                 { MessageBox.Show("Please enter a title and category.", "Missing Fields", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
-                AddEvent(txtTitle.Text.Trim(), txtCat.Text.Trim(), dtp.Value.Date);
+
+                var ev = new EventItem { Title = txtTitle.Text.Trim(), Category = txtCat.Text.Trim(), Date = dtp.Value.Date };
+                AddEvent(ev);
                 txtTitle.Clear(); txtCat.Clear();
                 LoadAllEvents();
-                MessageBox.Show("Event added successfully.", "Event Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Event '{ev.Title}' added!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             };
 
             btnBack.Click += (s, e) => Close();
 
-            // ── Load sample data ────────────────────────────────────
-            LoadSampleData();
-            LoadAllEvents();
+            // ── Placeholder hints ─────────────────────────────────
+            txtTitle.Text = "Event title…"; txtTitle.ForeColor = Color.Gray;
+            txtTitle.GotFocus += (s, e) => { if (txtTitle.Text == "Event title…") { txtTitle.Clear(); txtTitle.ForeColor = Color.Black; } };
+            txtTitle.LostFocus += (s, e) => { if (string.IsNullOrWhiteSpace(txtTitle.Text)) { txtTitle.Text = "Event title…"; txtTitle.ForeColor = Color.Gray; } };
+            txtCat.Text = "Category…"; txtCat.ForeColor = Color.Gray;
+            txtCat.GotFocus += (s, e) => { if (txtCat.Text == "Category…") { txtCat.Clear(); txtCat.ForeColor = Color.Black; } };
+            txtCat.LostFocus += (s, e) => { if (string.IsNullOrWhiteSpace(txtCat.Text)) { txtCat.Text = "Category…"; txtCat.ForeColor = Color.Gray; } };
 
             Controls.AddRange(new Control[]
             {
                 header,
-                lblSearch, txtSearch, btnSearch, btnClear, lblEventCount,
+                lblSearch, txtSearch, btnSearch, btnClear,
                 lblEvents, lstEvents,
                 lblRec, lstRecommendations,
-                lblActions, btnQueue, btnHistory, btnCategories, btnSorted,
-                addPanel,
+                btnQueue, btnHistory, btnCats, btnSorted,
+                lblAdd, txtTitle, txtCat, dtp, btnAdd,
+                lstInfo,
                 btnBack
             });
+
+            LoadAllEvents();
         }
 
-        // ── Helpers ─────────────────────────────────────────────────
+        // ── Seed sample events ────────────────────────────────────
+        private void SeedSampleEvents()
+        {
+            var samples = new List<EventItem>
+            {
+                new EventItem { Title="Community Clean-Up Day",        Category="Environment",  Date=DateTime.Today.AddDays(3)  },
+                new EventItem { Title="Town Hall Meeting",              Category="Governance",   Date=DateTime.Today.AddDays(7)  },
+                new EventItem { Title="Youth Sports Day",               Category="Sports",       Date=DateTime.Today.AddDays(10) },
+                new EventItem { Title="Road Repair Notice — Main St",   Category="Roads",        Date=DateTime.Today.AddDays(1)  },
+                new EventItem { Title="Water Shutdown Notice",          Category="Utilities",    Date=DateTime.Today.AddDays(2)  },
+                new EventItem { Title="Health Screening Drive",         Category="Health",       Date=DateTime.Today.AddDays(5)  },
+                new EventItem { Title="Ward Committee Meeting",         Category="Governance",   Date=DateTime.Today.AddDays(14) },
+                new EventItem { Title="Pothole Repair — Church Road",   Category="Roads",        Date=DateTime.Today.AddDays(4)  },
+                new EventItem { Title="Electricity Maintenance Outage", Category="Utilities",    Date=DateTime.Today.AddDays(6)  },
+                new EventItem { Title="Library Reading Programme",      Category="Education",    Date=DateTime.Today.AddDays(8)  },
+            };
+            foreach (var ev in samples) AddEvent(ev);
+        }
+
+        private void AddEvent(EventItem ev)
+        {
+            if (!sortedEvents.ContainsKey(ev.Date))
+                sortedEvents[ev.Date] = new List<EventItem>();
+            sortedEvents[ev.Date].Add(ev);
+            eventQueue.Enqueue(ev);
+            categories.Add(ev.Category);
+        }
+
+        // ── Load all events sorted by date ────────────────────────
+        private void LoadAllEvents()
+        {
+            lstEvents.Items.Clear();
+            lstEvents.Items.Add("  Date              Category          Title");
+            lstEvents.Items.Add("  ─────────────────────────────────────────────────────");
+            foreach (var kvp in sortedEvents)
+                foreach (var ev in kvp.Value)
+                    lstEvents.Items.Add($"  {ev.Date:dd MMM yyyy}   {ev.Category,-18} {ev.Title}");
+        }
+
+        // ── Search & recommend ────────────────────────────────────
+        private void DoSearch(string query)
+        {
+            if (string.IsNullOrEmpty(query)) return;
+
+            // Track search pattern
+            searchHistory.Push(query);
+            string key = query.ToLower();
+            if (!searchCount.ContainsKey(key)) searchCount[key] = 0;
+            searchCount[key]++;
+
+            // Filter
+            lstEvents.Items.Clear();
+            lstEvents.Items.Add($"  Results for: \"{query}\"");
+            lstEvents.Items.Add("  ─────────────────────────────────────────────────────");
+            bool found = false;
+            foreach (var kvp in sortedEvents)
+                foreach (var ev in kvp.Value)
+                    if (ev.Title.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0
+                     || ev.Category.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        lstEvents.Items.Add($"  {ev.Date:dd MMM yyyy}   {ev.Category,-18} {ev.Title}");
+                        found = true;
+                    }
+            if (!found) lstEvents.Items.Add("  No matching events found.");
+
+            // Recommendations based on frequency of past searches
+            BuildRecommendations(key);
+        }
+
+        private void BuildRecommendations(string lastKey)
+        {
+            lstRecommendations.Items.Clear();
+            lstRecommendations.Items.Add("── Based on your searches ──");
+
+            // Find all events whose category contains any frequently searched keyword
+            var topTerms = searchCount.OrderByDescending(kv => kv.Value).Take(3).Select(kv => kv.Key).ToList();
+
+            var recommended = new HashSet<string>();
+            foreach (var term in topTerms)
+                foreach (var kvp in sortedEvents)
+                    foreach (var ev in kvp.Value)
+                        if ((ev.Category.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0
+                          || ev.Title.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
+                          && !recommended.Contains(ev.Title))
+                        {
+                            lstRecommendations.Items.Add($"• {ev.Title}");
+                            recommended.Add(ev.Title);
+                        }
+
+            if (lstRecommendations.Items.Count == 1)
+                lstRecommendations.Items.Add("No recommendations yet.");
+        }
+
+        private void ShowQueue()
+        {
+            lstInfo.Items.Clear();
+            lstInfo.Items.Add("── Event Queue (FIFO) ──");
+            foreach (var ev in eventQueue)
+                lstInfo.Items.Add($"  {ev.Date:dd MMM}  {ev.Category}  {ev.Title}");
+        }
+
+        private void ShowHistory()
+        {
+            lstInfo.Items.Clear();
+            lstInfo.Items.Add("── Search History (LIFO) ──");
+            if (searchHistory.Count == 0) { lstInfo.Items.Add("  No searches yet."); return; }
+            foreach (var s in searchHistory)
+                lstInfo.Items.Add($"  > {s}");
+        }
+
+        private void ShowCategories()
+        {
+            lstInfo.Items.Clear();
+            lstInfo.Items.Add("── Unique Categories (HashSet) ──");
+            foreach (var c in categories.OrderBy(x => x))
+                lstInfo.Items.Add($"  • {c}");
+        }
+
         private Label MakeLabel(string text, int left, int top)
         {
-            return new Label
+            var lbl = new Label
             {
-                Text = text, Top = top, Left = left, AutoSize = true,
+                Text = text, Left = left, Top = top, AutoSize = true,
                 Font = new Font("Segoe UI", 9, FontStyle.Bold),
                 ForeColor = Color.FromArgb(50, 60, 80)
             };
+            Controls.Add(lbl);
+            return lbl;
         }
 
         private Button MakeButton(string text, int left, int top, int width, Color colour)
         {
             var btn = new Button
             {
-                Text = text, Top = top, Left = left,
-                Width = width, Height = 34,
+                Text = text, Left = left, Top = top,
+                Width = width, Height = 32,
                 BackColor = colour, ForeColor = Color.White,
-                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                Font = new Font("Segoe UI", 8, FontStyle.Bold),
                 FlatStyle = FlatStyle.Flat, Cursor = Cursors.Hand
             };
             btn.FlatAppearance.BorderSize = 0;
             return btn;
-        }
-
-        // ── Win32 cue banner (PlaceholderText for .NET Framework 4.8) ──
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wp, string lp);
-        private const uint EM_SETCUEBANNER = 0x1501;
-        private static void SetPlaceholder(TextBox tb, string text)
-        {
-            tb.HandleCreated += (s, e) => SendMessage(tb.Handle, EM_SETCUEBANNER, (IntPtr)1, text);
-        }
-
-        // ── Data operations ─────────────────────────────────────────
-        private void AddEvent(string title, string category, DateTime date)
-        {
-            // Avoid duplicate dates in SortedDictionary by adding seconds offset
-            while (sortedEvents.ContainsKey(date))
-                date = date.AddSeconds(1);
-
-            var ev = new EventItem { Title = title, Category = category, Date = date };
-            events.Add(ev);
-            eventQueue.Enqueue(ev);
-            uniqueCategories.Add(category);
-            sortedEvents[date] = ev;
-        }
-
-        private void LoadSampleData()
-        {
-            AddEvent("Community Cleanup Drive",        "Sanitation",          DateTime.Now.AddDays(2));
-            AddEvent("Pothole Repair — Main Road",     "Roads",               DateTime.Now.AddDays(3));
-            AddEvent("Water Supply Maintenance",       "Water",               DateTime.Now.AddDays(5));
-            AddEvent("Electricity Grid Upgrade",       "Electricity",         DateTime.Now.AddDays(7));
-            AddEvent("Public Park Renovation",         "Parks & Recreation",  DateTime.Now.AddDays(10));
-            AddEvent("Waste Removal Schedule Update",  "Waste Removal",       DateTime.Now.AddDays(1));
-            AddEvent("Street Lighting Installation",   "Public Lighting",     DateTime.Now.AddDays(4));
-            AddEvent("Town Hall Meeting",              "Community",           DateTime.Now.AddDays(6));
-        }
-
-        private void LoadAllEvents()
-        {
-            lstEvents.Items.Clear();
-            lstEvents.Items.Add("── All Events (sorted by date) ──");
-            foreach (var kvp in sortedEvents)
-                lstEvents.Items.Add($"  {kvp.Key:dd MMM yyyy}  —  {kvp.Value.Title}  [{kvp.Value.Category}]");
-            lblEventCount.Text = $"Total events: {events.Count}  |  Categories: {uniqueCategories.Count}";
-        }
-
-        private void Search(string query)
-        {
-            if (string.IsNullOrWhiteSpace(query)) { LoadAllEvents(); return; }
-
-            string q = query.Trim().ToLower();
-            searchHistory.Push(q);
-
-            lstEvents.Items.Clear();
-            lstEvents.Items.Add($"── Results for \"{q}\" ──");
-
-            var results = events.Where(ev =>
-                ev.Category.ToLower().Contains(q) ||
-                ev.Title.ToLower().Contains(q)).ToList();
-
-            if (results.Count == 0)
-                lstEvents.Items.Add("  No matching events found.");
-            else
-                foreach (var ev in results.OrderBy(ev => ev.Date))
-                    lstEvents.Items.Add($"  {ev.Date:dd MMM yyyy}  —  {ev.Title}  [{ev.Category}]");
-
-            lblEventCount.Text = $"{results.Count} result(s) found  |  Search history: {searchHistory.Count} item(s)";
-
-            Recommend(q, results);
-        }
-
-        // ── Recommendation algorithm ────────────────────────────────
-        // Content-based filtering: matches by category AND title;
-        // weighted so category matches score higher than title-only matches.
-        private void Recommend(string query, List<EventItem> searchResults)
-        {
-            lstRecommendations.Items.Clear();
-
-            var categoryMatches = events
-                .Where(ev => ev.Category.ToLower().Contains(query) &&
-                             !searchResults.Any(r => r.Title == ev.Title))
-                .ToList();
-
-            var titleMatches = events
-                .Where(ev => ev.Title.ToLower().Contains(query) &&
-                             !searchResults.Any(r => r.Title == ev.Title) &&
-                             !categoryMatches.Any(c => c.Title == ev.Title))
-                .ToList();
-
-            // Also recommend events in the same categories as results
-            var sameCategory = events
-                .Where(ev => searchResults.Any(r => r.Category == ev.Category) &&
-                             !searchResults.Any(r => r.Title == ev.Title) &&
-                             !categoryMatches.Any(c => c.Title == ev.Title))
-                .ToList();
-
-            if (!categoryMatches.Any() && !titleMatches.Any() && !sameCategory.Any())
-            {
-                lstRecommendations.Items.Add("No recommendations found.");
-                return;
-            }
-
-            if (categoryMatches.Any())
-            {
-                lstRecommendations.Items.Add("── Category matches ──");
-                foreach (var ev in categoryMatches)
-                    lstRecommendations.Items.Add($"★ {ev.Title} [{ev.Category}]");
-            }
-            if (sameCategory.Any())
-            {
-                lstRecommendations.Items.Add("── Related events ──");
-                foreach (var ev in sameCategory)
-                    lstRecommendations.Items.Add($"◆ {ev.Title} [{ev.Category}]");
-            }
-            if (titleMatches.Any())
-            {
-                lstRecommendations.Items.Add("── Title matches ──");
-                foreach (var ev in titleMatches)
-                    lstRecommendations.Items.Add($"◇ {ev.Title} [{ev.Category}]");
-            }
         }
     }
 }

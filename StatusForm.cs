@@ -26,7 +26,7 @@ namespace MunicipalServicesApp
         public StatusForm()
         {
             Text = "Service Request Status";
-            Size = new Size(980, 680);
+            Size = new Size(980, 710);
             StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
